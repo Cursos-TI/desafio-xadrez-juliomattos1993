@@ -1,32 +1,56 @@
 #include <stdio.h>
+int main(){
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+ const int MOV_BISPO = 5;
+ const int MOV_TORRE = 5;
+ const int MOV_RAINHA = 8;
 
-int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
+ //BISPO - MOVIMENTO DIAGONAL SUPERIOR A DIREITA.
+ printf("Movimentação do BISPO (diagonal superior direita):\n");
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
+ // Usa estrutura FOR para mover o Bispo em diagonal (Cima + Direita)
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
+ for (int i = 1; i <= MOV_BISPO;i++) {
+    printf("Casa %d" , i);
+    printf(" cima + direita \n");
+ }
 
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
+ printf("\n");
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
+ //TORRE - MOVIMENTO PARA DIREITA .
+ printf("movimento da TORRE ( direita )\n");
 
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
+ // // Usa estrutura WHILE
 
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+ int j = 1;
+ while (j <= MOV_TORRE){
+     printf("Casa %d : Direita\n",j);
+     j++;
+ }
+ 
+ printf("\n");
+
+ //RAINHA - movimento para esquerda. 
+ 
+ printf("movimento da RAINHA ( esquerda )\n");
+ 
+ // Usa estrutura DO...WHILE
+
+ int k =1;
+ do
+ { 
+     printf("Casa %d : esquerda \n", k);
+     k++;
+
+    
+ } while (k <= MOV_RAINHA);
+
+ printf("\n");
+ printf("MOVIMENTACOES CONCLUIDAS COM SUCESSO !!!\n");
+
+
+
+
 
     return 0;
 }
