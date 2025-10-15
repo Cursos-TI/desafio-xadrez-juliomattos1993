@@ -46,7 +46,33 @@ int main(){
  } while (k <= MOV_RAINHA);
 
  printf("\n");
- printf("MOVIMENTACOES CONCLUIDAS COM SUCESSO !!!\n");
+   
+   // CAVALO - MOVIMENTO EM 'L' baixo + esquerda. 
+
+ printf("MOVIMENTACOES DO CAVALO ( em L baixo + esquerda) \n");
+   
+ const int MOV_BAIXO = 2; // 2 Casas para baixo
+ const int MOV_ESQUERDA = 1; // 1 casa para esquerda
+
+ // loop externo - movimento para baixo ( usa FOR )
+
+  for (int linha = 1; linha <= MOV_BAIXO ; linha++){
+          printf(" movimento %d para BAIXO\n", linha);
+          
+// loop interno - movimento para esquerda ( usa While)
+    int coluna = 1;
+    while (coluna <= MOV_ESQUERDA){
+        printf("movimento %d para ESQUERDA\n", coluna);
+        coluna++;
+
+    }
+    printf("n"); // separa visualemnte os movimentos.
+    printf("movimentacao em L concluidas com sucesso !! \n");
+    printf("MOVIMENTACOES CONCLUIDAS COM SUCESSO!!!!!\n");
+
+    
+  }
+
 
 
 
