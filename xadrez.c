@@ -1,82 +1,103 @@
 #include <stdio.h>
-int main(){
 
- const int MOV_BISPO = 5;
- const int MOV_TORRE = 5;
- const int MOV_RAINHA = 8;
+// ============================
+// FUNÇÕES RECURSIVAS
+// ============================
 
- //BISPO - MOVIMENTO DIAGONAL SUPERIOR A DIREITA.
- printf("Movimentação do BISPO (diagonal superior direita):\n");
+// TORRE – movimento para a direita (recursivo)
+void moverTorre(int casa, int limite) {
+    if (casa > limite) return; // Caso base: fim da recursão
+    printf("Casa %d: Direita\n", casa);
+    moverTorre(casa + 1, limite); // Chamada recursiva
+}
 
- // Usa estrutura FOR para mover o Bispo em diagonal (Cima + Direita)
+// RAINHA – movimento para a esquerda (recursivo)
+void moverRainha(int casa, int limite) {
+    if (casa > limite) return;
+    printf("Casa %d: Esquerda\n", casa);
+    moverRainha(casa + 1, limite);
+}
 
- for (int i = 1; i <= MOV_BISPO;i++) {
-    printf("Casa %d" , i);
-    printf(" cima + direita \n");
- }
+// BISPO – movimento diagonal (recursivo + loops aninhados)
+void moverBispo(int vertical, int limiteVertical, int limiteHorizontal) {
+    if (vertical > limiteVertical) return; // Caso base: parou o movimento vertical
 
- printf("\n");
+    printf("Movimento %d para CIMA:\n", vertical);
 
- //TORRE - MOVIMENTO PARA DIREITA .
- printf("movimento da TORRE ( direita )\n");
-
- // // Usa estrutura WHILE
-
- int j = 1;
- while (j <= MOV_TORRE){
-     printf("Casa %d : Direita\n",j);
-     j++;
- }
- 
- printf("\n");
-
- //RAINHA - movimento para esquerda. 
- 
- printf("movimento da RAINHA ( esquerda )\n");
- 
- // Usa estrutura DO...WHILE
-
- int k =1;
- do
- { 
-     printf("Casa %d : esquerda \n", k);
-     k++;
-
-    
- } while (k <= MOV_RAINHA);
-
- printf("\n");
-   
-   // CAVALO - MOVIMENTO EM 'L' baixo + esquerda. 
-
- printf("MOVIMENTACOES DO CAVALO ( em L baixo + esquerda) \n");
-   
- const int MOV_BAIXO = 2; // 2 Casas para baixo
- const int MOV_ESQUERDA = 1; // 1 casa para esquerda
-
- // loop externo - movimento para baixo ( usa FOR )
-
-  for (int linha = 1; linha <= MOV_BAIXO ; linha++){
-          printf(" movimento %d para BAIXO\n", linha);
-          
-// loop interno - movimento para esquerda ( usa While)
-    int coluna = 1;
-    while (coluna <= MOV_ESQUERDA){
-        printf("movimento %d para ESQUERDA\n", coluna);
-        coluna++;
-
+    // Loop aninhado – movimento horizontal dentro do vertical
+    for (int horizontal = 1; horizontal <= limiteHorizontal; horizontal++) {
+        printf("   Diagonal: CIMA + DIREITA (%d, %d)\n", vertical, horizontal);
     }
-    printf("n"); // separa visualemnte os movimentos.
-    printf("movimentacao em L concluidas com sucesso !! \n");
-    printf("MOVIMENTACOES CONCLUIDAS COM SUCESSO!!!!!\n");
 
-    
-  }
+    moverBispo(vertical + 1, limiteVertical, limiteHorizontal); // chamada recursiva
+}
 
+// ============================
+// CAVALO – loops complexos (sem recursividade)
+// ============================
 
+// Movimento do cavalo: duas casas para cima e uma para direita
+void moverCavalo(int movimentosVerticais, int movimentosHorizontais) {
+    printf("Movimento do CAVALO (em L: 2 para cima, 1 para direita)\n");
 
+    // Loop externo controla o movimento vertical
+    for (int cima = 1, direita = 1; cima <= movimentosVerticais; cima++) {
 
+        // Quando chegar à segunda casa para cima, faz o movimento para direita
+        if (cima == 2) {
+            while (direita <= movimentosHorizontais) {
+                printf("Movimento %d para DIREITA\n", direita);
+                direita++;
 
+                // Se chegou ao limite, encerra antecipadamente com break
+                if (direita > movimentosHorizontais) break;
+            }
+        }
+
+        // Caso contrário, apenas sobe
+        printf("Movimento %d para CIMA\n", cima);
+
+        // Continue pula o restante do loop e vai para a próxima iteração
+        continue;
+    }
+
+    printf("Movimentação em L concluída com sucesso!\n");
+}
+
+// ============================
+// FUNÇÃO PRINCIPAL
+// ============================
+int main() {
+    // Constantes definidas no código (sem entrada do usuário)
+    const int MOV_TORRE = 5;
+    const int MOV_RAINHA = 8;
+    const int MOV_BISPO_VERT = 3;
+    const int MOV_BISPO_HORZ = 3;
+    const int MOV_CAVALO_VERT = 2;
+    const int MOV_CAVALO_HORZ = 1;
+
+    printf("===== MOVIMENTOS COMPLEXOS DE XADREZ =====\n\n");
+
+    // ---------------- TORRE ----------------
+    printf("TORRE (recursividade - direita)\n");
+    moverTorre(1, MOV_TORRE);
+    printf("\n");
+
+    // ---------------- RAINHA ----------------
+    printf("RAINHA (recursividade - esquerda)\n");
+    moverRainha(1, MOV_RAINHA);
+    printf("\n");
+
+    // ---------------- BISPO ----------------
+    printf("BISPO (recursividade + loops aninhados - diagonal)\n");
+    moverBispo(1, MOV_BISPO_VERT, MOV_BISPO_HORZ);
+    printf("\n");
+
+    // ---------------- CAVALO ----------------
+    moverCavalo(MOV_CAVALO_VERT, MOV_CAVALO_HORZ);
+    printf("\n");
+
+    printf("===== TODAS AS MOVIMENTAÇÕES CONCLUÍDAS COM SUCESSO! =====\n");
 
     return 0;
 }
